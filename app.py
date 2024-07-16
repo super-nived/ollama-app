@@ -39,7 +39,7 @@ def rag_chain_endpoint():
     data = request.get_json()
     url = data.get('url')
     question = data.get('question')
-    
+    print(url,question,"*********")
     if not url or not question:
         return jsonify({'error': 'URL and question are required'}), 400
     
@@ -50,4 +50,4 @@ def rag_chain_endpoint():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=7860)
