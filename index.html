@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chain Question Answering</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #response {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #response h2 {
+            margin: 0 0 10px;
+        }
+
+        #response p {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RAG Chain Question Answering</h1>
+        <form id="questionForm">
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url" required>
+            
+            <label for="question">Question:</label>
+            <textarea id="question" name="question" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response">
+            <h2>Response:</h2>
+            <p id="answer"></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const url = document.getElementById('url').value;
+            const question = document.getElementById('question').value;
+            
+            fetch('http://127.0.0.1:5000/rag_chain', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url, question: question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const answerElement = document.getElementById('answer');
+                const responseDiv = document.getElementById('response');
+                if (data.error) {
+                    answerElement.textContent = `Error: ${data.error}`;
+                } else {
+                    answerElement.textContent = data.answer;
+                }
+                responseDiv.style.display = 'block';
+            })
+            .catch(error => {
+                const answerElement = document.getElementById('answer');
+                answerElement.textContent = `Error: ${error.message}`;
+                document.getElementById('response').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

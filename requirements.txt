@@ -1,0 +1,8 @@
+gradio==4.37.2
+beautifulsoup4==4.12.3
+langchain==0.2.7
+langchain-community==0.2.7
+ollama==0.2.1
+colorama==0.4.6
+Flask==2.1.2
+Flask-Cors==3.0.10
