@@ -45,9 +45,9 @@ def rag_chain_endpoint():
     
     try:
         answer = rag_chain(url, question)
-        return jsonify({'answer': answer}), 200
+        return jsonify({'message': answer}), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'message': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7860)
