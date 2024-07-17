@@ -4,6 +4,9 @@ FROM python:3.10
 # Install Git
 RUN apt-get update && apt-get install -y git
 
+# Update pip to the latest version
+RUN pip install --upgrade pip
+
 # Set up your working directory in the container
 WORKDIR /app
 
@@ -15,4 +18,3 @@ RUN pip install -r requirements.txt
 
 # Command to run your Python application
 CMD ["python", "app.py"]
-
