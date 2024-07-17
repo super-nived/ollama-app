@@ -36,18 +36,18 @@ def rag_chain(url, question):
 # Flask endpoint for the RAG chain
 @app.route('/rag_chain', methods=['POST'])
 def rag_chain_endpoint():
-    data = request.get_json()
-    url = data.get('url')
-    question = data.get('question')
-    print(url,question,"*********")
-    if not url or not question:
-        return jsonify({'error': 'URL and question are required'}), 400
+    # data = request.get_json()
+    # url = data.get('url')
+    # question = data.get('question')
+    # print(url,question,"*********")
+    # if not url or not question:
+    #     return jsonify({'error': 'URL and question are required'}), 400
     
-    try:
-        answer = rag_chain(url, question)
-        return jsonify({'message': answer}), 200
-    except Exception as e:
-        return jsonify({'message': str(e)}), 500
+    # try:
+    #     answer = rag_chain(url, question)
+    return jsonify({'message': "request recieved done"}), 200
+    # except Exception as e:
+        # return jsonify({'message': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7860)
