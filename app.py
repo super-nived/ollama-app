@@ -1,4 +1,4 @@
-import bs4
+
 from flask import Flask, request, jsonify
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import WebBaseLoader
