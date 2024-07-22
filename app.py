@@ -42,7 +42,7 @@ def rag_chain(url, question):
     print(formatted_context,'this formated docs')
     formatted_prompt = f"Question: {question}\n\nContext: {formatted_context}"
     response = ollama.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
-    return "done super"
+    return response
 
 # Flask endpoint for the RAG chain
 @app.route('/rag_chain', methods=['POST'])
