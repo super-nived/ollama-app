@@ -42,7 +42,7 @@ def rag_chain(url, question):
     print(formatted_context,'this formated docs')
     formatted_prompt = f"Question: {question}\n\nContext: {formatted_context}"
     response = ollama.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
-    return response
+    return response['message']['content']
 
 # Flask endpoint for the RAG chain
 @app.route('/rag_chain', methods=['POST'])
@@ -57,6 +57,7 @@ def rag_chain_endpoint():
     try:
         print("entering in to rag chain function")
         answer = rag_chain(url, question)
+        print(answer)
         return jsonify({'message': answer}), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
