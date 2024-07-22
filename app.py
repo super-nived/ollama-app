@@ -40,8 +40,8 @@ def rag_chain(url, question):
     print(retrieved_docs,"this is retrived docs")
     formatted_context = format_docs(retrieved_docs)
     print(formatted_context,'this formated docs')
-    # formatted_prompt = f"Question: {question}\n\nContext: {formatted_context}"
-    # response = ollama.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
+    formatted_prompt = f"Question: {question}\n\nContext: {formatted_context}"
+    response = ollama.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
     return "done super"
 
 # Flask endpoint for the RAG chain
